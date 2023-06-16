@@ -42,8 +42,27 @@ app.post('/cadastroProduto', (req, res) => {
 });
 
 app.get("/buscaProdutos",(req,res)=>{
-  Produto.buscaProdutos()
-	res.send('Nada');
+  var codigoProcurado = req.query.codigo;
+  Produto.Produto.findAll({
+    where:{id:codigoProcurado}
+  }
+  ).
+      then(function(produtos){
+        console.log(produtos);
+        var tabela = ''
+        for(var i = 0;i< produtos.length;i++){
+          tabela+=" Id :"+produtos[i]['id'];
+          tabela+=" Nome :"+produtos[i]['nome'];
+          tabela+=" Valor :"+produtos[i]['valor'];
+          tabela+="<br>";
+        }
+        console.log(tabela);
+        res.send(tabela)
+      }). 
+      catch(function(erro){
+        console.log('Erro na busca'+erro);
+        res.send("Erro na busca")
+      })
 })
 
 app.listen(port, () => {

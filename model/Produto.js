@@ -50,13 +50,7 @@ function insereProduto(valorRecebido,nomeRecebido,fotoRecebida,qtdEstoqueRecebid
   }
 //
   function buscaProdutos(){
-    Produto.findAll().
-      then(function(produtos){
-        console.log(produtos);
-      }). 
-      catch(function(erro){
-        console.log('Erro na busca'+erro);
-      })
+    
   }
 //
   module.exports = {
